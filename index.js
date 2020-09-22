@@ -76,7 +76,7 @@ setInterval(() => {
 
     
 
-    if(state.apples.length < 5) {
+    if(state.apples.length < 25) {
         let emp = [rnd(0, n-1), rnd(0, n-1)];
         state.apples.push(emp);
         console.log("pushing: ");
