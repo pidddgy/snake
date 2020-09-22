@@ -46,18 +46,31 @@ setInterval(() => {
         state.snakes[i].update();
         let hitapple = false;
         let head = state.snakes[i].body[0];
-
+        
+        del = [];
         for(let i = 0; i < state.apples.length; i++) {
             let a = state.apples[i];
 
             if(a[0] === head[0] && a[1] === head[1]) {
                 hitapple = true;
+                del.push(i);
             }
         }
 
         if(hitapple) {
             state.snakes[i].grow();
+            state.snakes[i].grow();
         }
+
+        newapples = [];
+
+        for(let i = 0; i < state.apples.length; i++) {
+            if(!del.includes(i)) {
+                newapples.push(state.apples[i]);
+            }
+        }
+
+        state.apples = newapples;
     });
     io.emit("state", state);
 
