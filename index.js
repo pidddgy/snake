@@ -101,9 +101,9 @@ setInterval(() => {
     });
 
     cnt = [];
-    for(let i = 0; i < 80; i++) {
+    for(let i = 0; i < 100; i++) {
         row = [];
-        for(let j = 0; j < 80; j++) {
+        for(let j = 0; j < 100; j++) {
             row.push(0);
         }
         cnt.push(row);
