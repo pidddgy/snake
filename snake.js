@@ -1,8 +1,9 @@
 class Snake {
     // body -> list of pairs
     constructor() {
-        this.body = [[0, 3], [0, 4], [0, 5], [0, 6]];
-        this.dir = [0, 1]; // todo -> change
+        // will get reset at start
+        this.body = [];
+        this.dir = [0, 0];
     }
 
     update() {
