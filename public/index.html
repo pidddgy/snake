@@ -4,8 +4,55 @@
     <title>owo</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
     <script src="./main.js"> console.log("e");</script>
   </head>
   <body>
+    <div class = "ui grid" id = "container"> 
+        <div class = "left floated ten wide column"> 
+            <div id="sketch-holder"> </div>
+        </div>
+
+        <div class = "left floated six wide column">
+            <div id = "config" class="ui message left grid container">
+                <div class="left floated four wide column">
+                    <h2> Config </h2>
+                    <div class="ui input">
+                        <input id = "nick" type="text" placeholder="Nickname..." oninput="updateConfig()" maxlength='50'> </input>
+                    </div>
+                    <br/>
+                    <br/>
+                    <input id = "scolor" type="color" oninput="updateConfig()"> Colour </input>            
+                </div>
+                <div class="left floated four wide column">
+                    <h2> Scoreboard </h2>
+                    <div class="ui orderedlist" id = "rankings">
+                        <div class="item">
+                          <div class="content">
+                            <div class="header"> test </div>
+                            x points
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="content">
+                            <div class="header"> test </div>
+                            y points
+                          </div>
+                        </div>
+                        <div class="item">
+                          <div class="content">
+                            <div class="header"> test </div>
+                            z points
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
   </body>
+
 </html>

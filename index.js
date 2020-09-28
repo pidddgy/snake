@@ -27,6 +27,7 @@ reset = (id) => {
             state.snakes[id].dir[i] *= -1;
         }
     }
+    state.snakes[id].nick = "";
 } 
 
 rnd = (mi, ma) => {
@@ -39,6 +40,7 @@ io.on('connection', (socket) => {
     console.log('a user connected with id ' + socket.id);
     state.snakes[socket.id] = new Snake();
     reset(socket.id);
+    console.log(state.snakes[socket.id].color);
 
     socket.on('direction change', (dir) => {
         console.log('user ' + socket.id + 'wants to change direction to:')
@@ -56,6 +58,12 @@ io.on('connection', (socket) => {
             state.snakes[socket.id].dir = dir;
         }
     });
+
+    socket.on('config change', (newConfig) => {
+        // console.log("setting " + socket.id + " to " + newConfig[0] + "," + newConfig[1]);
+        state.snakes[socket.id].nick = newConfig[0];
+        state.snakes[socket.id].color = newConfig[1];
+    })
 
     socket.on('disconnect', () => {
         delete state.snakes[socket.id];

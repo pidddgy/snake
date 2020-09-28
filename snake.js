@@ -4,6 +4,8 @@ class Snake {
         // will get reset at start
         this.body = [];
         this.dir = [0, 0];
+        this.color = "#ffffff";
+        this.nick = "";
     }
 
     update() {
@@ -12,7 +14,7 @@ class Snake {
         
         for(let i = 0; i <= 1; i++) {
             if(newpos[i] == -1) newpos[i] = 79;
-            if(newpos[i] == 81) newpos[i] = 0;
+            if(newpos[i] == 80) newpos[i] = 0;
         }
 
         this.body.unshift(newpos);
