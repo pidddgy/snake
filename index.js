@@ -139,8 +139,21 @@ setInterval(() => {
 
     if(state.apples.length < rnd(0, 85)) {
         let emp = [rnd(0, n-1), rnd(0, n-1)];
-        state.apples.push(emp);
-        console.log("pushing: ");
-        console.log(emp);
+        
+        // Do not let apples generate too close to each other
+        let bad = false;
+        for(let a in state.apples) {
+            let h = 0;
+            h += Math.abs(a[0]-emp[0]);
+            h += Math.abs(a[1]-emp[1]);
+
+            if(h <= 1) bad = true;
+        }
+
+        if(!bad) {
+            state.apples.push(emp);
+            console.log("pushing: ");
+            console.log(emp);
+        }
     }
-}, 100);
+}, 130);
