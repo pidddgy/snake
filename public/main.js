@@ -39,8 +39,6 @@ socket.on('state', (newState) => {
 
 let slap, bite;
 socket.on('playSound', (sound) => {
-    console.log("play sound" + sound);
-
     if(sound === 'slap') {
         slap.play();
     } else if(sound == 'bite') {
