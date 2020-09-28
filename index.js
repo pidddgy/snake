@@ -97,6 +97,7 @@ setInterval(() => {
             state.snakes[i].grow();
             state.snakes[i].grow();
             state.snakes[i].update();
+            io.emit("playSound", "bite");
         }
 
         newapples = [];
@@ -129,6 +130,7 @@ setInterval(() => {
     Object.keys(state.snakes).forEach(function (i) {
         let head = state.snakes[i].body[0];
         if(cnt[head[0]][head[1]] > 1) {
+            io.emit("playSound", "slap");
             reset(i);
         }
     });

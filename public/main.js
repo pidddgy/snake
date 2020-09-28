@@ -23,12 +23,12 @@ socket.on('state', (newState) => {
     }
     v.sort(compare);
 
-    console.log(v);
+    // console.log(v);
 
     html = '';
     for(let i = 0; i < v.length; i++) {
         let snake = v[i];
-        console.log(snake);
+        // console.log(snake);
         html += "<div class=\"item\"> ";
             html += "<div class=\"content\"> ";
                 let nick = snake.nick;
@@ -43,11 +43,28 @@ socket.on('state', (newState) => {
     document.getElementById("rankings").innerHTML = html;
 })
 
+let slap, bite;
+socket.on('playSound', (sound) => {
+    console.log("play sound" + sound);
+
+    if(sound === 'slap') {
+        slap.play();
+    } else if(sound == 'bite') {
+        bite.play();
+    }
+})
+
+preload = () => {
+    slap = loadSound('slap.mp3');
+    bite = loadSound('bite.wav');
+}
+
 setup = () => {
     let cnv = createCanvas(800, 800);
     cnv.parent('sketch-holder');
     document.getElementById("scolor").value = "#ffffff";
     updateConfig();
+    soundFormats('mp3', 'wav');
 }
 
 // compare integer arrays with epilson
