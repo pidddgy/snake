@@ -20,6 +20,18 @@ setup = () => {
     updateConfig();
 }
 
+// compare integer arrays with epilson
+cmp = (a, b) => {
+    let same = true;
+    for(let i = 0; i < a.length; i++) {
+        if(abs(a[i]-b[i]) > 0.0001) {
+            same = false;
+        }
+    }
+
+    return same;
+}
+
 draw = () => {
     background(220);
     updateConfig();
@@ -27,8 +39,8 @@ draw = () => {
         console.log(state.snakes[i]);
         let body = state.snakes[i].body;
         for(let j = 0; j < body.length; j++) {
-            console.log("drawing w color " +state.snakes[i].color);
-            console.log(state.snakes[i].color);
+            // console.log("drawing w color " +state.snakes[i].color);
+            // console.log(state.snakes[i].color);
             fill(color(state.snakes[i].color));
             // console.log("draw at " + body[j][0] + " " + body[j][1]);
             square(body[j][0]*10, body[j][1]*10, 10);
@@ -39,19 +51,20 @@ draw = () => {
         fill(50);
         
         let shift = 10;
-        const left = [-1, 0];
-        const up = [0, -1];
-        for(let i = 0; i <= 1; i++) {
-            if(Math.abs(state.snakes[i]-left[i]) > 0.001) shift = 0;
-        }
-            
-        let xshift = -20;
-        for(let i = 0; i <= 1; i++) {
-            if(Math.abs(state.snakes[i]-up[i]) > 0.001) xshift = 0;
-        }
+        
+        let d = state.snakes[i].dir;
 
-        if(xshift === -20) shift = -10;
-        text(state.snakes[i].nick, head[0]*10+(state.snakes[i].dir[0]*10)+xshift, head[1]*10+(state.snakes[i].dir[1]*10)+shift, 100, 100);
+        shift = null;
+        if(cmp(d, [-1, 0])) {
+            shift = [0, 0];
+        } else if(cmp(d, [1, 0])) {
+            shift = [0, 2];
+        } else if(cmp(d, [0, 1])) {
+            shift = [0, 2];
+        } else {
+            shift = [0, 0];
+        }
+        text(state.snakes[i].nick, 10*(head[0]+shift[0]), 10*(head[1]+shift[1]));
     });
 
     state.apples.forEach((apple) => {
