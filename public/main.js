@@ -11,6 +11,36 @@ socket.on('state', (newState) => {
     // console.log("state received");
     state = newState;
     // console.log(state.apples);
+
+    let v = [];
+    Object.keys(state.snakes).forEach((i) => {
+        v.push(state.snakes[i]);        
+    })
+
+    // should snake l be ordered before r?
+    compare = (l, r) => {
+        return r.body.length - l.body.length;
+    }
+    v.sort(compare);
+
+    console.log(v);
+
+    html = '';
+    for(let i = 0; i < v.length; i++) {
+        let snake = v[i];
+        console.log(snake);
+        html += "<div class=\"item\"> ";
+            html += "<div class=\"content\"> ";
+                let nick = snake.nick;
+                if(nick.length === 0) nick = "(unnamed snake)";
+                html += "<div class=\"header\"> "+ nick +" </div> ";
+            html += snake.body.length;
+            html += ' points';
+            html += '</div>';
+        html += '</div>';
+    }
+
+    document.getElementById("rankings").innerHTML = html;
 })
 
 setup = () => {
@@ -36,7 +66,7 @@ draw = () => {
     background(220);
     updateConfig();
     Object.keys(state.snakes).forEach(function (i) {
-        console.log(state.snakes[i]);
+        // console.log(state.snakes[i]);
         let body = state.snakes[i].body;
         for(let j = 0; j < body.length; j++) {
             // console.log("drawing w color " +state.snakes[i].color);

@@ -15,6 +15,8 @@ let state = {
 };
 
 reset = (id) => {
+    if(!state.snakes.hasOwnProperty(id)) return;
+
     let sx = rnd(0, n-1), sy = rnd(0, n-1);
 
     state.snakes[id].body = [[sx, sy]];
