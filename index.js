@@ -1,6 +1,4 @@
-const { randomBytes } = require('crypto');
 const express = require('express');
-const { stat } = require('fs');
 const app = express();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -43,7 +41,6 @@ io.on('connection', (socket) => {
     console.log('a user connected with id ' + socket.id);
     state.snakes[socket.id] = new Snake();
     reset(socket.id);
-    console.log(state.snakes[socket.id].color);
 
     socket.on('direction change', (dir) => {
         console.log('user ' + socket.id + 'wants to change direction to:')
@@ -63,7 +60,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('config change', (newConfig) => {
-        // console.log("setting " + socket.id + " to " + newConfig[0] + "," + newConfig[1]);
         state.snakes[socket.id].nick = newConfig[0];
         state.snakes[socket.id].color = newConfig[1];
     })
@@ -148,13 +144,11 @@ setInterval(() => {
             h += Math.abs(a[0]-emp[0]);
             h += Math.abs(a[1]-emp[1]);
 
-            if(h <= 1) bad = true;
+            if(h <= 2) bad = true;
         }
 
         if(!bad) {
             state.apples.push(emp);
-            console.log("pushing: ");
-            console.log(emp);
         }
     }
 }, 85);

@@ -1,6 +1,4 @@
-
-var socket = io();
-console.log("hello");
+let socket = io();
 
 let state = {
     snakes: {},
@@ -8,27 +6,23 @@ let state = {
 };
 
 socket.on('state', (newState) => {
-    // console.log("state received");
     state = newState;
-    // console.log(state.apples);
 
     let v = [];
     Object.keys(state.snakes).forEach((i) => {
         v.push(state.snakes[i]);        
     })
 
-    // should snake l be ordered before r?
+    // Should snake l be ordered before r?
     compare = (l, r) => {
         return r.body.length - l.body.length;
     }
     v.sort(compare);
 
-    // console.log(v);
 
     html = '';
     for(let i = 0; i < v.length; i++) {
         let snake = v[i];
-        // console.log(snake);
         html += "<div class=\"item\"> ";
             html += "<div class=\"content\"> ";
                 let nick = snake.nick;
@@ -67,7 +61,7 @@ setup = () => {
     soundFormats('mp3', 'wav');
 }
 
-// compare integer arrays with epilson
+// Compare integer arrays with epilson
 cmp = (a, b) => {
     let same = true;
     for(let i = 0; i < a.length; i++) {
@@ -83,13 +77,9 @@ draw = () => {
     background(220);
     updateConfig();
     Object.keys(state.snakes).forEach(function (i) {
-        // console.log(state.snakes[i]);
         let body = state.snakes[i].body;
         for(let j = 0; j < body.length; j++) {
-            // console.log("drawing w color " +state.snakes[i].color);
-            // console.log(state.snakes[i].color);
             fill(color(state.snakes[i].color));
-            // console.log("draw at " + body[j][0] + " " + body[j][1]);
             square(body[j][0]*10, body[j][1]*10, 10);
             fill(color(255, 255, 255));
         }
@@ -116,7 +106,6 @@ draw = () => {
 
     state.apples.forEach((apple) => {
         fill(color(255, 0, 0));
-        // console.log("draw at " + apple[0] + " " + apple[1]);
         square(apple[0]*10, apple[1]*10, 10)
         fill(color(255, 255, 255));
 
@@ -138,8 +127,6 @@ keyPressed = () => {
 updateConfig = () => {
     let nick = document.getElementById("nick").value;
     let color = document.getElementById("scolor").value;
-
-    // console.log("config change, state is " + nick + "," + color);
 
     socket.emit('config change', [nick, color])
 }
