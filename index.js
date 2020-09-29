@@ -140,6 +140,11 @@ setInterval(() => {
         let head = state.snakes[i].body[0];
         if(cnt[head[0]][head[1]] > 1) {
             io.emit("playSound", "slap");
+            for(let j = 0; j < state.snakes[i].body.length; j++) {
+                if(rnd(0, 3)) {
+                    state.apples.push(state.snakes[i].body[j]);
+                }
+            }
             reset(i);
         }
     });
