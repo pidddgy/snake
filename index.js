@@ -31,7 +31,6 @@ reset = (id) => {
             }
         }
 
-        state.snakes[id].nick = "";
         state.snakes[id].growing = 0;
     } catch {
         console.log("user already disconnected")
