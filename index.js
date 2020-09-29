@@ -51,7 +51,14 @@ io.on('connection', (socket) => {
         console.log('user ' + socket.id + 'wants to change direction to:')
         console.log(dir);
 
-        let op = state.snakes[socket.id].dir.slice();
+        let op;
+        
+        if(state.snakes[socket.id].queue.length > 0) {
+            op = state.snakes[socket.id].queue[0].slice();
+        } else {
+            op = state.snakes[socket.id].dir.slice();
+        }
+        
         let same = true;
         for(let i = 0; i <= 1; i++) {
             op[i] *= -1;
@@ -60,7 +67,7 @@ io.on('connection', (socket) => {
         }
         
         if(!same) {
-            state.snakes[socket.id].dir = dir;
+            state.snakes[socket.id].queue.push(dir);
         }
     });
 

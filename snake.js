@@ -7,10 +7,16 @@ class Snake {
         this.color = "#ffffff";
         this.nick = "";
         this.growing = 0;
+        // queue of direction changes
+        this.queue = [];
     }
 
     update() {
         let cur = this.body[0];
+        if(this.queue.length > 0) {
+            this.dir = this.queue[0];
+            this.queue.shift();
+        }
         let newpos = [cur[0]+this.dir[0], cur[1]+this.dir[1]];
         
         for(let i = 0; i <= 1; i++) {
@@ -28,8 +34,6 @@ class Snake {
     }
 
     grow() {
-        console.log("growing");
-        // this.body.push(this.body[this.body.length-1]);
         this.growing++;
     }
 }
