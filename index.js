@@ -32,7 +32,7 @@ reset = (id) => {
         state.snakes[id].nick = "";
         state.snakes[id].growing = 0;
     } catch {
-        pass;
+        console.log("user already disconnected")
     }
 } 
 
@@ -48,36 +48,44 @@ io.on('connection', (socket) => {
     reset(socket.id);
 
     socket.on('direction change', (dir) => {
-        console.log('user ' + socket.id + 'wants to change direction to:')
-        console.log(dir);
-
-        let op;
-        
-        if(state.snakes[socket.id].queue.length > 0) {
-            op = state.snakes[socket.id].queue[0].slice();
-        } else {
-            op = state.snakes[socket.id].dir.slice();
-        }
-        
-        let same = true;
-        for(let i = 0; i <= 1; i++) {
-            op[i] *= -1;
-
-            if(Math.abs(dir[i]-op[i]) > 0.001) same = false;
-        }
-        
-        if(!same) {
-            state.snakes[socket.id].queue.push(dir);
+        try {
+            console.log('user ' + socket.id + 'wants to change direction to:')
+            console.log(dir);
+    
+            let op;
+            
+            if(state.snakes[socket.id].queue.length > 0) {
+                op = state.snakes[socket.id].queue[0].slice();
+            } else {
+                op = state.snakes[socket.id].dir.slice();
+            }
+            
+            let same = true;
+            for(let i = 0; i <= 1; i++) {
+                op[i] *= -1;
+    
+                if(Math.abs(dir[i]-op[i]) > 0.001) same = false;
+            }
+            
+            if(!same) {
+                state.snakes[socket.id].queue.push(dir);
+            }
+        } catch {
+            console.log("user disconnected");
         }
     });
 
     socket.on('config change', (newConfig) => {
-        state.snakes[socket.id].nick = newConfig[0];
-        state.snakes[socket.id].color = newConfig[1];
+        try {
+            state.snakes[socket.id].nick = newConfig[0];
+            state.snakes[socket.id].color = newConfig[1];
+        } catch {
+            console.log("user already disconnected")
+        }
     })
 
     socket.on('disconnect', () => {
-        state.snakes[socket.id].body = [];
+        delete state.snakes[socket.id];
         console.log('user ' + socket.id + ' disconnected');
     });
 });
