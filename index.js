@@ -13,22 +13,24 @@ let state = {
 };
 
 reset = (id) => {
-    if(!state.snakes.hasOwnProperty(id)) return;
-    if(state.snakes[id] === undefined) return;
-
-    let sx = rnd(0, n-1), sy = rnd(0, n-1);
-
-    state.snakes[id].body = [[sx, sy]];
-
-    state.snakes[id].dir = [0, 0];
-    state.snakes[id].dir[rnd(0, 1)^1] = 1;
-
-    if(rnd(0, 1) == 1) {
-        for(let i = 0; i <= 1; i++) {
-            state.snakes[id].dir[i] *= -1;
+    try {
+        if(!state.snakes.hasOwnProperty(id)) return;
+        if(state.snakes[id] === undefined) return;
+    
+        let sx = rnd(0, n-1), sy = rnd(0, n-1);
+    
+        state.snakes[id].body = [[sx, sy]];
+    
+        state.snakes[id].dir = [0, 0];
+        state.snakes[id].dir[rnd(0, 1)^1] = 1;
+    
+        if(rnd(0, 1) == 1) {
+            for(let i = 0; i <= 1; i++) {
+                state.snakes[id].dir[i] *= -1;
+            }
         }
+        state.snakes[id].nick = "";
     }
-    state.snakes[id].nick = "";
 } 
 
 rnd = (mi, ma) => {
