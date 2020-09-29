@@ -1,7 +1,7 @@
 # snake clone
 hi mr heathfield
 
-Multiplayer snake game! Inspired by the retro classic and slither.io. The object is get as big as possible while simultaneously stopping others from growing. Some features include a live scoreboard and customizable nickname/color. Check it out @ https://vast-gorge-79620.herokuapp.com/ (i am too lazy and broke to get an actual domain)
+Multiplayer snake game! Inspired by the retro classic and slither.io. The object is get as big as possible while simultaneously stopping others from growing (kill them by running in front of them). Some features include a live scoreboard and customizable nickname/color. Check it out @ https://vast-gorge-79620.herokuapp.com/ (i am too lazy and broke to get an actual domain). Snakes are controlled with arrow keys.
 
 ## High level overview
 ### snake class
