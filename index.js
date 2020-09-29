@@ -30,6 +30,8 @@ reset = (id) => {
             }
         }
         state.snakes[id].nick = "";
+    } catch {
+        pass;
     }
 } 
 
