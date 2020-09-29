@@ -105,7 +105,6 @@ setInterval(() => {
 
         if(hitapple) {
             state.snakes[i].grow();
-            state.snakes[i].grow();
             io.emit("playSound", "bite");
         }
 
