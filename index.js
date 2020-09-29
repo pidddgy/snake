@@ -149,15 +149,16 @@ setInterval(() => {
     if(state.apples.length < rnd(0, 85)) {
         let emp = [rnd(0, n-1), rnd(0, n-1)];
         
-        // Do not let apples generate too close to each other
+        // Do not let apples generate on top of each other
         let bad = false;
         for(let a in state.apples) {
             let h = 0;
-            h += Math.abs(a[0]-emp[0]);
-            h += Math.abs(a[1]-emp[1]);
-
-            if(h <= 2) bad = true;
+            if(a[0] === emp[0] && a[1] === emp[1]) {
+                bad = true;
+            }
         }
+
+        if(cnt[emp[0]][emp[1]]) bad = true;
 
         if(!bad) {
             state.apples.push(emp);
