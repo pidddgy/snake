@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        delete state.snakes[socket.id];
+        state.snakes[socket.id].body = [];
         console.log('user ' + socket.id + ' disconnected');
     });
 });
