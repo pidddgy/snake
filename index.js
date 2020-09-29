@@ -30,6 +30,7 @@ reset = (id) => {
             }
         }
         state.snakes[id].nick = "";
+        state.snakes[id].growing = 0;
     } catch {
         pass;
     }
@@ -98,7 +99,6 @@ setInterval(() => {
         if(hitapple) {
             state.snakes[i].grow();
             state.snakes[i].grow();
-            state.snakes[i].update();
             io.emit("playSound", "bite");
         }
 
@@ -156,4 +156,4 @@ setInterval(() => {
             state.apples.push(emp);
         }
     }
-}, 85);
+}, 70);

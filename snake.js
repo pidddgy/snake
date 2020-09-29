@@ -6,6 +6,7 @@ class Snake {
         this.dir = [0, 0];
         this.color = "#ffffff";
         this.nick = "";
+        this.growing = 0;
     }
 
     update() {
@@ -18,12 +19,18 @@ class Snake {
         }
 
         this.body.unshift(newpos);
-        this.body.pop();
+
+        if(this.growing) {
+            this.growing--; 
+        } else {
+            this.body.pop();
+        }
     }
 
     grow() {
         console.log("growing");
-        this.body.push(this.body[this.body.length-1]);
+        // this.body.push(this.body[this.body.length-1]);
+        this.growing++;
     }
 }
 
