@@ -25,9 +25,7 @@ socket.on('state', (newState) => {
         let snake = v[i];
         html += "<div class=\"item\"> ";
             html += "<div class=\"content\"> ";
-                let nick = snake.nick;
-                if(nick.length === 0) nick = "(unnamed snake)";
-                html += "<div class=\"header\"> "+ nick +" </div> ";
+                html += "<div class=\"header nickname\"> </div>";
             html += snake.body.length;
             html += ' points';
             html += '</div>';
@@ -35,6 +33,15 @@ socket.on('state', (newState) => {
     }
 
     document.getElementById("rankings").innerHTML = html;
+
+    for(let i = 0; i < document.getElementsByClassName('header nickname').length; i++) {
+        let el = document.getElementsByClassName('header nickname')[i];
+
+        el.textContent = v[i].nick;
+        if(v[i].nick.length === 0) {
+            el.textContent = "(unnamed snake)";
+        }
+    }
 })
 
 let slap, bite;
