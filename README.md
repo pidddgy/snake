@@ -26,6 +26,6 @@ Multiplayer snake game! Inspired by the retro classic and slither.io. The object
 ### stuff used
 - Frontend: [p5.js](https://p5js.org), [Semantic UI](https://semantic-ui.com/)
 - Backend: [node.js](https://nodejs.org/en/), [express.js](https://expressjs.com/)
-- Misc: [socket.io](socket.io), some random sound effects I found on YouTube
+- Misc: [socket.io](socket.io), [Heroku](https://www.heroku.com/), some random sound effects I found on YouTube
 
 ![alt text](https://i.imgur.com/2KLubDB.png)
