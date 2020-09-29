@@ -1,4 +1,4 @@
-## snake clone
+# snake clone
 hi mr heathfield
 
 Multiplayer snake game! Inspired by the retro classic and slither.io. The object is get as big as possible while simultaneously stopping others from growing. Some features include a live scoreboard and customizable nickname/color. Check it out @ https://vast-gorge-79620.herokuapp.com/ (i am too lazy and broke to get an actual domain)
@@ -27,3 +27,5 @@ Multiplayer snake game! Inspired by the retro classic and slither.io. The object
 - Frontend: [p5.js](https://p5js.org), [Semantic UI](https://semantic-ui.com/)
 - Backend: [node.js](https://nodejs.org/en/), [express.js](https://expressjs.com/)
 - Misc: [socket.io](socket.io), some random sound effects I found on YouTube
+
+![alt text](https://i.imgur.com/2KLubDB.png)

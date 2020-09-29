@@ -12,6 +12,7 @@ let state = {
     apples: []
 };
 
+// reset a snake, used at start and when you die
 reset = (id) => {
     try {
         if(!state.snakes.hasOwnProperty(id)) return;
@@ -37,6 +38,7 @@ reset = (id) => {
     }
 } 
 
+// Random number between mi-ma inclusive
 rnd = (mi, ma) => {
     return Math.floor(Math.random() * (ma - mi + 1)) + mi;
 }
@@ -48,6 +50,7 @@ io.on('connection', (socket) => {
     state.snakes[socket.id] = new Snake();
     reset(socket.id);
 
+    // Use a bunch of try/catches because sometimes a user disconnects and we try to do things to a user that doesnt exist then it all breaks and uh oh
     socket.on('direction change', (dir) => {
         try {
             console.log('user ' + socket.id + 'wants to change direction to:')
@@ -102,6 +105,7 @@ setInterval(() => {
         let hitapple = false;
         let head = state.snakes[i].body[0];
         
+        // del -> apples to delete
         del = [];
         for(let i = 0; i < state.apples.length; i++) {
             let a = state.apples[i];
@@ -119,6 +123,7 @@ setInterval(() => {
 
         newapples = [];
 
+        // Only keep apples that aren't being deleted
         for(let i = 0; i < state.apples.length; i++) {
             if(!del.includes(i)) {
                 newapples.push(state.apples[i]);
@@ -128,6 +133,7 @@ setInterval(() => {
         state.apples = newapples;
     });
 
+    // cnt[i][j] -> how many snakes are occupying square i,j
     cnt = [];
     for(let i = 0; i < 100; i++) {
         row = [];
@@ -169,7 +175,8 @@ setInterval(() => {
                 bad = true;
             }
         }
-
+        
+        // Don't let apples generate on top of a snake
         if(cnt[emp[0]][emp[1]]) bad = true;
 
         if(!bad) {

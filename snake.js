@@ -1,7 +1,7 @@
 class Snake {
     // body -> list of pairs
     constructor() {
-        // will get reset at start
+        // Will get reset at start
         this.body = [];
         this.dir = [0, 0];
         this.color = "#ffffff";
@@ -11,6 +11,7 @@ class Snake {
         this.queue = [];
     }
 
+    // Function called on tick
     update() {
         let cur = this.body[0];
         if(this.queue.length > 0) {

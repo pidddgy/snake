@@ -8,6 +8,7 @@ let state = {
 socket.on('state', (newState) => {
     state = newState;
 
+    // Render scoreboard
     let v = [];
     Object.keys(state.snakes).forEach((i) => {
         v.push(state.snakes[i]);        
@@ -18,7 +19,6 @@ socket.on('state', (newState) => {
         return r.body.length - l.body.length;
     }
     v.sort(compare);
-
 
     html = '';
     for(let i = 0; i < v.length; i++) {
@@ -34,6 +34,7 @@ socket.on('state', (newState) => {
 
     document.getElementById("rankings").innerHTML = html;
 
+    // We have to do this because if we just insert the nickname with innerHTML then people can insert arbitrary HTML code which could be malicious
     for(let i = 0; i < document.getElementsByClassName('header nickname').length; i++) {
         let el = document.getElementsByClassName('header nickname')[i];
 
@@ -44,6 +45,7 @@ socket.on('state', (newState) => {
     }
 })
 
+// Receive playSound messages from the server
 let slap, bite;
 socket.on('playSound', (sound) => {
     if(sound === 'slap') {
@@ -53,11 +55,13 @@ socket.on('playSound', (sound) => {
     }
 })
 
+// Load sound files
 preload = () => {
     slap = loadSound('slap.mp3');
     bite = loadSound('bite.wav');
 }
 
+// Initialize everything
 setup = () => {
     let cnv = createCanvas(800, 800);
     cnv.parent('sketch-holder');
@@ -78,16 +82,20 @@ cmp = (a, b) => {
     return same;
 }
 
+// Main loop
 draw = () => {
     background(220);
     updateConfig();
     Object.keys(state.snakes).forEach(function (i) {
+        // Draw each square of the snake's body
         let body = state.snakes[i].body;
         for(let j = 0; j < body.length; j++) {
             fill(color(state.snakes[i].color));
             square(body[j][0]*10, body[j][1]*10, 10);
             fill(color(255, 255, 255));
         }
+
+        // Draw the nickname that the user set
         let head = body[0];
         textSize(12);
         fill(50);
@@ -96,6 +104,7 @@ draw = () => {
         
         let d = state.snakes[i].dir;
 
+        // Decide how to shift the nickname based on direction (try to make it visible)
         shift = null;
         if(cmp(d, [-1, 0])) {
             shift = [0, 0];
@@ -109,11 +118,11 @@ draw = () => {
         text(state.snakes[i].nick, 10*(head[0]+shift[0]), 10*(head[1]+shift[1]));
     });
 
+    // Render apples
     state.apples.forEach((apple) => {
         fill(color(255, 0, 0));
         square(apple[0]*10, apple[1]*10, 10)
         fill(color(255, 255, 255));
-
     })
 }
 
