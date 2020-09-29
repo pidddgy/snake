@@ -22,13 +22,14 @@ reset = (id) => {
         state.snakes[id].body = [[sx, sy]];
     
         state.snakes[id].dir = [0, 0];
-        state.snakes[id].dir[rnd(0, 1)^1] = 1;
+        state.snakes[id].dir[rnd(0, 1)] = 1;
     
         if(rnd(0, 1) == 1) {
             for(let i = 0; i <= 1; i++) {
                 state.snakes[id].dir[i] *= -1;
             }
         }
+
         state.snakes[id].nick = "";
         state.snakes[id].growing = 0;
     } catch {
@@ -164,7 +165,6 @@ setInterval(() => {
         // Do not let apples generate on top of each other
         let bad = false;
         for(let a in state.apples) {
-            let h = 0;
             if(a[0] === emp[0] && a[1] === emp[1]) {
                 bad = true;
             }
