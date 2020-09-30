@@ -80,7 +80,19 @@ io.on('connection', (socket) => {
 
     socket.on('config change', (newConfig) => {
         try {
-            state.snakes[socket.id].nick = newConfig[0];
+            // dont let things like zalgo text in
+            let bad = false;
+            if(newConfig[0].length > 30) bad = true;
+            
+            // Source: https://stackoverflow.com/questions/61519041/regex-to-detect-zalgo
+            const re = /%CC%/g
+            const hasZalgo = txt => re.test(encodeURIComponent(txt));  
+            
+            if(hasZalgo(newConfig[0])) bad = true;
+
+            if(!bad) {
+                state.snakes[socket.id].nick = newConfig[0];
+            }
             state.snakes[socket.id].color = newConfig[1];
         } catch {
             console.log("user already disconnected")
