@@ -29,3 +29,11 @@ Multiplayer snake game! Inspired by the retro classic and slither.io. The object
 - Misc: [socket.io](socket.io), [Heroku](https://www.heroku.com/), some random sound effects I found on YouTube
 
 ![alt text](https://i.imgur.com/2KLubDB.png)
+
+### installation instructions (to run locally)
+
+```
+git clone https://github.com/pidddgy/snake
+npm install
+node index.js
+```
