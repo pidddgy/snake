@@ -88,6 +88,7 @@ io.on('connection', (socket) => {
             const re = /%CC%/g
             const hasZalgo = txt => re.test(encodeURIComponent(txt));  
             
+            if(!bad) 
             if(hasZalgo(newConfig[0])) bad = true;
 
             if(!bad) {
